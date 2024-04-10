@@ -58,6 +58,7 @@
     <module>apt-test-generator</module>
     <module>annotation-error-decoder</module>
     <module>example-github</module>
+    <module>example-github-with-springboot</module>
     <module>example-github-with-coroutine</module>
     <module>example-wikipedia</module>
     <module>example-wikipedia-with-springboot</module>

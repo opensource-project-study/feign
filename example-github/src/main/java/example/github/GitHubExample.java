@@ -26,6 +26,9 @@ import feign.gson.GsonEncoder;
 
 /**
  * Inspired by {@code com.example.retrofit.GitHubClient}
+ *
+ * <p>github REST API参考：https://docs.github.com/en/rest?apiVersion=2022-11-28
+ * <p>https://docs.github.com/en/rest/repos/repos?apiVersion=2022-11-28#list-repository-contributors
  */
 public class GitHubExample {
 
@@ -84,7 +87,7 @@ public class GitHubExample {
                 // not available when building PRs...
                 // https://docs.travis-ci.com/user/environment-variables/#defining-encrypted-variables-in-travisyml
                 "Authorization",
-                "token 383f1c1b474d8f05a21e7964976ab0d403fee071");
+                "token ");
           })
           .options(new Request.Options(10, TimeUnit.SECONDS, 60, TimeUnit.SECONDS, true))
           .target(GitHub.class, "https://api.github.com");
@@ -104,6 +107,9 @@ public class GitHubExample {
   public static void main(String... args) {
     final GitHub github = GitHub.connect();
 
+//    List<GitHub.Repository> repositories = github.repos("openfeign");
+//    repositories.stream().forEach(repository -> System.out.println(repository.name));
+
     System.out.println("Let's fetch and print a list of the contributors to this org.");
     final List<String> contributors = github.contributors("openfeign");
     for (final String contributor : contributors) {
@@ -115,6 +121,8 @@ public class GitHubExample {
       github.contributors("openfeign", "some-unknown-project");
     } catch (final GitHubClientError e) {
       System.out.println(e.getMessage());
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
     }
 
     System.out.println("Now, try to create an issue - which will also cause an error.");
@@ -124,6 +132,8 @@ public class GitHubExample {
       issue.body = "Some Text";
       github.createIssue(issue, "OpenFeign", "SomeRepo");
     } catch (final GitHubClientError e) {
+      System.out.println(e.getMessage());
+    } catch (Exception e) {
       System.out.println(e.getMessage());
     }
   }
