@@ -29,7 +29,7 @@ public class GithubExample3 {
         .encoder(new GsonEncoder())
         .decoder(new GsonDecoder())
         .client(new OkHttpClient())
-        .requestInterceptor(template -> template.header("Authorization", "token "))
+        .requestInterceptor(template -> template.header("Authorization", "token " + Constants.GITHUB_PERSONAL_TOKEN))
         .target(GitHub.class, "https://api.github.com");
 
     // Fetch and print a list of the contributors to this library.

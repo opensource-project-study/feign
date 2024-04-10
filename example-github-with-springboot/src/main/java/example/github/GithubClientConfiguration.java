@@ -18,6 +18,6 @@ public class GithubClientConfiguration {
 
 //  @Bean
 //  public RequestInterceptor requestInterceptor() {
-//    return template -> template.header("Authorization", "token ");
+//    return template -> template.header("Authorization", "token " + Constants.GITHUB_PERSONAL_TOKEN);
 //  }
 }

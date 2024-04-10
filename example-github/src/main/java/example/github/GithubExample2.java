@@ -28,7 +28,7 @@ public class GithubExample2 {
   public static void main(String... args) {
     GitHub github = Feign.builder()
         .decoder(new GsonDecoder())
-        .requestInterceptor(template -> template.header("Authorization", "token "))
+        .requestInterceptor(template -> template.header("Authorization", "token " + Constants.GITHUB_PERSONAL_TOKEN))
         .target(GitHub.class, "https://api.github.com");
 
     // Fetch and print a list of the contributors to this library.
